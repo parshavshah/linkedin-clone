@@ -173,6 +173,7 @@ export const getUserConnections = async (req, res) => {
   }
 };
 
+
 export const removeConnection = async (req, res) => {
   try {
     const myId = req.user._id;

@@ -147,14 +147,11 @@ export const likePost = async (req, res) => {
     const userId = req.user._id;
 
     if (post.likes.includes(userId)) {
-      // unlike the post
       post.likes = post.likes.filter(
         (id) => id.toString() !== userId.toString()
       );
     } else {
-      // like the post
       post.likes.push(userId);
-      // create a notification if the post owner is not the user who liked
       if (post.author.toString() !== userId.toString()) {
         const newNotification = new Notification({
           recipient: post.author,
@@ -162,7 +159,6 @@ export const likePost = async (req, res) => {
           relatedUser: userId,
           relatedPost: postId,
         });
-
         await newNotification.save();
       }
     }
